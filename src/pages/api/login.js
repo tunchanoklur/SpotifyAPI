@@ -1,5 +1,7 @@
-const clientId = 'd57ab4103ced402191e4d0b305a3c241'
-const redirectURI = 'http://localhost:3000/'
+require('dotenv').config()
+
+const clientId = process.env.CLIENT_ID
+const redirectURI = process.env.REDIRECT_URI
 
 export default (req, res) => {
   res.setHeader('Content-Type', 'application/json')
