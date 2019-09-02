@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import Helmet from 'react-helmet'
-import App, { Container } from 'next/app'
+import App from 'next/app'
 import { flowRight as compose } from 'lodash'
 
 import { withFontLoader } from '@lib/font'
@@ -14,11 +14,11 @@ class MyApp extends App {
     const { Component, router } = this.props
 
     return (
-      <Container>
+      <Fragment>
         <GlobalStyles />
         <Helmet titleTemplate={`%s - nextweb.js`} />
         <Component {...this.props.pageProps} router={router} />
-      </Container>
+      </Fragment>
     )
   }
 }
