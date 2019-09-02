@@ -73,6 +73,7 @@
     "react-waypoint": "^9.0.2",
     "serve-favicon": "^2.5.0",
     "universal-cookie": "^4.0.2",
+    "universal-cookie-express": "^4.0.1",
     "webfontloader": "^1.6.28",
     "webpack-pwa-manifest": "^4.0.0"
   },

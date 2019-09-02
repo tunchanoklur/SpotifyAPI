@@ -12,18 +12,14 @@ import { CookiesProvider, withCookies } from 'react-cookie'
 
 class MyApp extends App {
   render() {
-    const { Component, router, cookies } = this.props
+    const { Component, router } = this.props
 
     if (!process.browser) {
       return (
         <Fragment>
           <GlobalStyles />
           <Helmet titleTemplate={`%s - nextweb.js`} />
-          <Component
-            {...this.props.pageProps}
-            router={router}
-            cookies={cookies}
-          />
+          <Component {...this.props.pageProps} router={router} />
         </Fragment>
       )
     }
@@ -32,11 +28,7 @@ class MyApp extends App {
       <CookiesProvider>
         <GlobalStyles />
         <Helmet titleTemplate={`%s - nextweb.js`} />
-        <Component
-          {...this.props.pageProps}
-          router={router}
-          cookies={cookies}
-        />
+        <Component {...this.props.pageProps} router={router} />
       </CookiesProvider>
     )
   }
