@@ -6,14 +6,20 @@ import withPage from '@lib/page/withPage'
 import * as ArticleService from '@features/article/data/services'
 
 import ArticleLatest, { ArticleList } from './ArticleLatest'
+import { useCookies } from 'react-cookie'
+import Cookies from 'universal-cookie'
 
-function HomePage({ articleLatest }) {
+function HomePage() {
+  const [cookies, setCookie, removeCookie] = useCookies(['spotify-token'])
+  const test = new Cookies()
+  console.log('spotify-token', cookies)
+  console.log('spotify-token_new', test.get('spotify-token'))
   return (
     <Flex flexWrap="wrap">
       <Box width={[1, 2 / 3]} pr={[0, 20]}>
-        <ArticleLatest data={articleLatest} />
+        {/* <ArticleLatest data={articleLatest} /> */}
 
-        <FetchMore
+        {/* <FetchMore
           service={({ start, limit }) =>
             ArticleService.getArticles({ start, limit })
           }
@@ -32,7 +38,7 @@ function HomePage({ articleLatest }) {
               </Fragment>
             )
           }}
-        </FetchMore>
+        </FetchMore> */}
       </Box>
 
       <Box width={[1, 1 / 3]} pl={[0, 20]}>
@@ -43,11 +49,11 @@ function HomePage({ articleLatest }) {
 }
 
 HomePage.getInitialProps = async () => {
-  const articleLatest = await ArticleService.getLatestArticles()
+  // const articleLatest = await ArticleService.getLatestArticles()
 
   return {
     title: 'Home',
-    articleLatest,
+    // articleLatest,
   }
 }
 
