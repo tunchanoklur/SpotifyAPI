@@ -8,17 +8,19 @@ import * as AlbumService from '@features/album/data/services'
 function HomePage({ token }) {
   return (
     <Flex flexWrap="wrap">
-      <Box width={[1, 2 / 3]} pr={[0, 20]}>
-        <Fetch service={() => AlbumService.getNewReleases({ token })}>
-          {({ data }) => {
-            console.log('data', data)
-          }}
-        </Fetch>
-      </Box>
-
-      <Box width={[1, 1 / 3]} pl={[0, 20]}>
-        <div>Sidebar</div>
-      </Box>
+      <Fetch service={() => AlbumService.getNewReleases({ token })}>
+        {({ data }) => {
+          console.log('data', data)
+          return data.albums.items.map(album => (
+            <Box width={1 / 5} px={10} key={album.id}>
+              <article>
+                <img src={album.images[0].url} />
+                <p>{album.name}</p>
+              </article>
+            </Box>
+          ))
+        }}
+      </Fetch>
     </Flex>
   )
 }
