@@ -1,5 +1,4 @@
 import React from 'react'
-import { Flex, Box } from '@rebass/grid/emotion'
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
 
 export function SongListItem({ track }) {
@@ -7,27 +6,48 @@ export function SongListItem({ track }) {
     <div
       css={{
         padding: '20px',
-        display: 'block',
+        display: 'flex',
         minWidth: '95%',
         borderStyle: 'outset',
       }}>
       <span
         css={{
-          display: 'inline-block',
           width: '5%',
         }}>
-        <Icon icon="play" />
+        <button
+          css={{
+            padding: '0 0 0 11px',
+            marginRight: '10px',
+            borderRadius: '50%',
+            backgroundColor: 'transparent',
+            border: 'thin solid currentColor',
+            justifyContent: 'center',
+            width: '40px',
+            height: '40px',
+          }}>
+          <Icon
+            icon="play"
+            css={{
+              alignItems: 'center',
+              display: 'flex',
+              flex: '1 0 auto',
+              justifyContent: 'inherit',
+              lineHeight: 'normal',
+              position: 'relative',
+            }}
+          />
+        </button>
       </span>
+
       <span
         css={{
-          display: 'inline-block',
           width: '80%',
+          alignSelf: 'center',
         }}>
         {track.name}
       </span>
       <span
         css={{
-          display: 'inline-block',
           width: '15%',
         }}>
         {transformDuration(track.duration_ms)}
