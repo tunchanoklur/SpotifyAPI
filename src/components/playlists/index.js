@@ -8,6 +8,9 @@ import * as PlaylistsService from '@features/browse/data/services'
 
 function PlaylistsPage() {
   const { token } = useContext(userContext)
+
+  if (!token) return null
+
   return (
     <Flex flexWrap="wrap">
       <Fetch service={() => PlaylistsService.getFeaturedPlaylists({ token })}>

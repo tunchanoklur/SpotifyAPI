@@ -9,6 +9,8 @@ import * as AlbumService from '@features/album/data/services'
 function HomePage() {
   const { token } = useContext(userContext)
 
+  if (!token) return null
+
   return (
     <Flex flexWrap="wrap">
       <Fetch service={() => AlbumService.getNewReleases({ token })}>
