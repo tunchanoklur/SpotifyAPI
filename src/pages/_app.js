@@ -8,18 +8,25 @@ import { withUA } from '@lib/userAgent'
 import withMobX from '@lib/store/withMobX'
 
 import { GlobalStyles } from '@lib/styles'
+import { CookiesProvider } from 'react-cookie'
 
 class MyApp extends App {
   render() {
     const { Component, router } = this.props
 
-    return (
+    const children = (
       <Fragment>
         <GlobalStyles />
         <Helmet titleTemplate={`%s - nextweb.js`} />
         <Component {...this.props.pageProps} router={router} />
       </Fragment>
     )
+
+    if (process.browser) {
+      return <CookiesProvider>{children}</CookiesProvider>
+    }
+
+    return children
   }
 }
 
