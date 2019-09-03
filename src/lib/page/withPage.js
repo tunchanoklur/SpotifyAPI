@@ -6,6 +6,7 @@ import { withRestrictedRoute } from '@lib/firebase/auth'
 
 import withMeta from './withMeta'
 import withLayout from './withLayout'
+import withToken from './withToken'
 import withErrorHandling from './withErrorHandling'
 
 export default function withPage(options = {}) {
@@ -16,6 +17,7 @@ export default function withPage(options = {}) {
       withStats,
       withRestrictedRoute(options.restricted),
       withLayout(options.layout),
+      withToken,
       withErrorHandling,
     ]
 
