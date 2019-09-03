@@ -4,15 +4,15 @@ import { userContext } from '@lib/page/withAuth'
 
 export default (restricted = false) => PageComponent => {
   function EnhancedPageComponent(props) {
-    const userData = useContext(userContext)
+    const { token } = useContext(userContext)
 
     useEffect(() => {
-      if (restricted && userData === null) {
+      if (restricted && !token) {
         Router.pushRoute('login', {
           redirect: props.router.asPath,
         })
       }
-    }, [restricted, userData])
+    }, [restricted, token])
 
     return <PageComponent {...props} />
   }

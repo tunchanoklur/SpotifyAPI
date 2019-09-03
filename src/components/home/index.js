@@ -12,9 +12,8 @@ function HomePage() {
   return (
     <Flex flexWrap="wrap">
       <Fetch service={() => AlbumService.getNewReleases({ token })}>
-        {({ data }) => {
-          console.log('data', data)
-          return data.albums.items.map(album => (
+        {({ data }) =>
+          data.albums.items.map(album => (
             <Box width={1 / 5} px={10} key={album.id}>
               <article>
                 <img src={album.images[0].url} />
@@ -22,7 +21,7 @@ function HomePage() {
               </article>
             </Box>
           ))
-        }}
+        }
       </Fetch>
     </Flex>
   )
