@@ -1,2 +1,2 @@
-import Playlists from '@components/playlists'
+import Playlists from '@components/playlists/playlistsList'
 export default Playlists
