@@ -24,6 +24,11 @@ const routes = [
     name: 'account',
     page: 'account',
   },
+  {
+    pattern: '/playlists',
+    name: 'playlists',
+    page: 'playlists',
+  },
 ]
 
 module.exports = routes

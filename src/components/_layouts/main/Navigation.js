@@ -16,6 +16,11 @@ const mainMenus = [
     route: 'about',
     icon: 'users',
   },
+  {
+    name: 'Playlists',
+    route: 'playlists',
+    icon: 'users',
+  },
 ]
 
 const trackEvent = menu => () => {
