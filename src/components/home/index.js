@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Flex, Box } from '@rebass/grid/emotion'
 
 import { Fetch } from '@lib/api'
 import withPage from '@lib/page/withPage'
+import { userContext } from '@lib/page/withAuth'
 import * as AlbumService from '@features/album/data/services'
 
-function HomePage({ token }) {
+function HomePage() {
+  const { token } = useContext(userContext)
+
   return (
     <Flex flexWrap="wrap">
       <Fetch service={() => AlbumService.getNewReleases({ token })}>

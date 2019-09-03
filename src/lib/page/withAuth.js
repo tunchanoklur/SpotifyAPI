@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useCookies } from 'react-cookie'
 
-const COOKIE_NAME = 'spotify-token'
+export const AUTH_COOKIE_NAME = 'spotify-token'
+
+export const userContext = React.createContext(null)
 
 function findTokenInAsPath(asPath) {
   const parts = asPath.split('access_token=')
@@ -17,17 +19,17 @@ function findTokenInAsPath(asPath) {
 export default function withToken(PageComponent) {
   function EnhancedPageComponent(props) {
     const [token, setToken] = useState(false)
-    const [cookies, setCookie] = useCookies([COOKIE_NAME])
+    const [cookies, setCookie] = useCookies([AUTH_COOKIE_NAME])
     const { asPath } = useRouter()
 
     useEffect(() => {
-      let token = cookies[COOKIE_NAME]
+      let token = cookies[AUTH_COOKIE_NAME]
 
       if (!token) {
         const tokenFromHash = findTokenInAsPath(asPath)
 
         if (tokenFromHash) {
-          setCookie(COOKIE_NAME, tokenFromHash)
+          setCookie(AUTH_COOKIE_NAME, tokenFromHash)
         }
 
         token = tokenFromHash
@@ -38,12 +40,15 @@ export default function withToken(PageComponent) {
       }
     }, [asPath])
 
-    const newProps = {
-      ...props,
+    const userData = {
       token,
     }
 
-    return <PageComponent {...newProps} />
+    return (
+      <userContext.Provider value={userData}>
+        <PageComponent {...props} />
+      </userContext.Provider>
+    )
   }
 
   EnhancedPageComponent.getInitialProps = async function(ctx) {

@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from 'react'
 import { Router } from '@router'
-import { userContext } from './withAuth'
+import { userContext } from '@lib/page/withAuth'
 
 export default (restricted = false) => PageComponent => {
   function EnhancedPageComponent(props) {
