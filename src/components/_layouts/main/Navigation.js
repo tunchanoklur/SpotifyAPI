@@ -70,6 +70,12 @@ export default function Navigation() {
           <LinkItem menu={{ name: 'Login', icon: 'sign-in-alt' }} />
         </Link>
       )}
+
+      {
+        <Link key="Login_new" to="api/login" passHref>
+          <button>Login</button>
+        </Link>
+      }
     </nav>
   )
 }
