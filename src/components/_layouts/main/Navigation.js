@@ -18,23 +18,14 @@ const mainMenus = [
   },
 ]
 
-function LinkItem({ menu, ...props }) {
-  return (
-    <a
-      {...props}
-      css={{
-        display: 'inline-box',
-        padding: '5px 15px 10px 0px',
-        marginRight: 10,
-        cursor: 'pointer',
-        [media('md')]: {
-          fontSize: '1.2em',
-        },
-      }}>
-      <Icon icon={menu.icon} />
-      {menu.name}
-    </a>
-  )
+const linkStyles = {
+  display: 'inline-box',
+  padding: '5px 15px 10px 0px',
+  marginRight: 10,
+  cursor: 'pointer',
+  [media('md')]: {
+    fontSize: '1.2em',
+  },
 }
 
 function Navigation({ cookies }) {
@@ -42,25 +33,30 @@ function Navigation({ cookies }) {
 
   return (
     <nav css={{ marginBottom: 10, borderBottom: '1px solid #aaa' }}>
-      {mainMenus.map(menu => (
-        <Link key={menu.name} to={menu.route} passHref>
-          <LinkItem menu={menu} />
+      {mainMenus.map(({ name, route, icon }) => (
+        <Link key={name} to={route} passHref>
+          <a css={linkStyles}>
+            <Icon icon={icon} />
+            {name}
+          </a>
         </Link>
       ))}
 
       {token ? (
-        <LinkItem
-          menu={{ name: 'Logout', icon: 'sign-out-alt' }}
+        <a
+          css={linkStyles}
           onClick={() => {
             cookies.remove(AUTH_COOKIE_NAME)
             location.href = '/'
-          }}
-        />
+          }}>
+          <Icon icon="sign-out-alt" />
+          Logout
+        </a>
       ) : (
-        <LinkItem
-          menu={{ name: 'Login', icon: 'sign-in-alt' }}
-          href="/api/login"
-        />
+        <a href="/api/login" css={linkStyles}>
+          <Icon icon="sign-in-alt" />
+          Login
+        </a>
       )}
     </nav>
   )
