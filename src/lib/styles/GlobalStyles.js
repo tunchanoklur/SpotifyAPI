@@ -6,7 +6,7 @@ const baseStyles = css`
   body {
     padding: 3rem 1rem;
     margin: 0;
-    background: papayawhip;
+    background: #cbebfe;
     min-height: 100%;
     font-family: 'Open Sans', sans-serif;
     font-size: 24px;

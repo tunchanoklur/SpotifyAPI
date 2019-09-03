@@ -5,7 +5,8 @@ import { Fetch } from '@lib/api'
 import withPage from '@lib/page/withPage'
 import { userContext } from '@lib/page/withAuth'
 import * as PlaylistsService from '@features/playlist/data/services'
-// import { BoxInformation } from '@components/_common/BoxInformation'
+import { DetailPageHeader } from '@components/_common/DetailPageHeader'
+import { SongList } from '@components/_common/SongList'
 
 function PlaylistsDetailPage({ id }) {
   const { token } = useContext(userContext)
@@ -14,6 +15,13 @@ function PlaylistsDetailPage({ id }) {
       <Fetch service={() => PlaylistsService.getPlaylists({ token, id })}>
         {({ data }) => {
           console.log('data', data)
+          return (
+            <div>
+              <DetailPageHeader data={data} />
+              <br />
+              <SongList tracks={data.tracks.items} />
+            </div>
+          )
         }}
       </Fetch>
     </Flex>
