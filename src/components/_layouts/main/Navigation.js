@@ -62,12 +62,6 @@ function Navigation({ cookies }) {
           href="/api/login"
         />
       )}
-
-      {
-        <Link key="Login_new" to="api/login" passHref>
-          <button>Login</button>
-        </Link>
-      }
     </nav>
   )
 }

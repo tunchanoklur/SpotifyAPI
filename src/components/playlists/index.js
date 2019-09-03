@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Flex, Box } from '@rebass/grid/emotion'
 
 import { Fetch } from '@lib/api'
 import withPage from '@lib/page/withPage'
+import { userContext } from '@lib/page/withAuth'
 import * as PlaylistsService from '@features/browse/data/services'
 
-function PlaylistsPage({ token }) {
+function PlaylistsPage() {
+  const { token } = useContext(userContext)
   return (
     <Flex flexWrap="wrap">
       <Fetch service={() => PlaylistsService.getFeaturedPlaylists({ token })}>
