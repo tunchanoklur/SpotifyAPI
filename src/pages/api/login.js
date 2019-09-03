@@ -9,19 +9,9 @@ export default (req, res) => {
   res.setHeader('Content-Type', 'application/json')
   res.statusCode = 200
 
-  if (req.query.code) {
-    res.cookie('spotify-token', req.query.code, {
-      path: '/',
-      maxAge: 86400,
-    })
-
-    res.redirect('/')
-    return
-  }
-
   res.redirect(
     'https://accounts.spotify.com/authorize' +
-      '?response_type=code' +
+      '?response_type=token' +
       '&client_id=' +
       clientId +
       (scopes ? '&scope=' + encodeURIComponent(scopes) : '') +

@@ -3,11 +3,13 @@ import axios from 'axios'
 export function fetchAPI({
   apiUrl = process.env.API_URL,
   path,
+  token,
   timeout = 10000,
   ...options
 }) {
   return axios({
     baseURL: `${apiUrl}${path}`,
+    headers: { Authorization: `Bearer ${token}` },
     timeout,
     ...options,
   }).then(({ data }) => data)

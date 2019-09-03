@@ -1,42 +1,44 @@
-import React, { Fragment } from 'react'
+import React from 'react'
+import { useRouter } from 'next/router'
 import { Flex, Box } from '@rebass/grid/emotion'
 
-import { FetchMore } from '@lib/api'
+import { Fetch } from '@lib/api'
 import withPage from '@lib/page/withPage'
-import * as ArticleService from '@features/article/data/services'
+import * as AlbumService from '@features/album/data/services'
 
-import ArticleLatest, { ArticleList } from './ArticleLatest'
 import { useCookies } from 'react-cookie'
 
+function findTokenInAsPath(asPath) {
+  const parts = asPath.split('access_token=')
+
+  if (parts.length === 2) {
+    return parts[1].split('&token_type=')[0]
+  }
+
+  return false
+}
+
 function HomePage() {
-  const [cookies] = useCookies(['spotify-token'])
-  console.log('spotify-token', cookies)
+  const { asPath } = useRouter()
+  const [cookies, setCookie] = useCookies(['spotify-token'])
+
+  const token = findTokenInAsPath(asPath)
+
+  if (token) {
+    setCookie('spotify-token', token)
+  }
 
   return (
     <Flex flexWrap="wrap">
       <Box width={[1, 2 / 3]} pr={[0, 20]}>
-        {/* <ArticleLatest data={articleLatest} /> */}
-
-        {/* <FetchMore
-          service={({ start, limit }) =>
-            ArticleService.getArticles({ start, limit })
-          }
-          start={5}
-          limit={5}>
-          {({ data, fetchMore, isLoading, isDone }) => {
-            return (
-              <Fragment>
-                <ArticleList data={data} />
-
-                {!isDone && (
-                  <button onClick={fetchMore}>
-                    {isLoading ? 'Loading...' : 'Load More'}
-                  </button>
-                )}
-              </Fragment>
-            )
+        <Fetch
+          service={() =>
+            AlbumService.getNewReleases({ token: cookies['spotify-token'] })
+          }>
+          {({ data }) => {
+            console.log('data', data)
           }}
-        </FetchMore> */}
+        </Fetch>
       </Box>
 
       <Box width={[1, 1 / 3]} pl={[0, 20]}>
@@ -47,11 +49,8 @@ function HomePage() {
 }
 
 HomePage.getInitialProps = async () => {
-  // const articleLatest = await ArticleService.getLatestArticles()
-
   return {
     title: 'Home',
-    // articleLatest,
   }
 }
 
