@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
+import { withCookies } from 'react-cookie'
 import { Link } from '@router'
-import * as GTM from '@lib/stats/gtm'
-import { userContext } from '@lib/firebase/auth'
+import { userContext, AUTH_COOKIE_NAME } from '@lib/page/withAuth'
 import { media } from '@lib/styles'
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
 
@@ -12,39 +12,21 @@ const mainMenus = [
     icon: 'home',
   },
   {
-    name: 'About',
-    route: 'about',
-    icon: 'users',
-  },
-  {
     name: 'Playlists',
     route: 'playlists',
     icon: 'users',
   },
 ]
 
-const trackEvent = menu => () => {
-  GTM.logEvent({
-    category: 'Navigation',
-    action: 'Clicked',
-    label: menu.name,
-    dimension1: 'dimension1',
-    dimension2: 'dimension2',
-  })
-}
-
 function LinkItem({ menu, ...props }) {
   return (
     <a
       {...props}
-      onClick={e => {
-        props.onClick(e)
-        trackEvent(menu)
-      }}
       css={{
         display: 'inline-box',
         padding: '5px 15px 10px 0px',
         marginRight: 10,
+        cursor: 'pointer',
         [media('md')]: {
           fontSize: '1.2em',
         },
@@ -55,8 +37,8 @@ function LinkItem({ menu, ...props }) {
   )
 }
 
-export default function Navigation() {
-  const userData = useContext(userContext)
+function Navigation({ cookies }) {
+  const { token } = useContext(userContext)
 
   return (
     <nav css={{ marginBottom: 10, borderBottom: '1px solid #aaa' }}>
@@ -66,14 +48,19 @@ export default function Navigation() {
         </Link>
       ))}
 
-      {userData ? (
-        <Link key="Account" to="account" passHref>
-          <LinkItem menu={{ name: 'Account', icon: 'user' }} />
-        </Link>
+      {token ? (
+        <LinkItem
+          menu={{ name: 'Logout', icon: 'sign-out-alt' }}
+          onClick={() => {
+            cookies.remove(AUTH_COOKIE_NAME)
+            location.href = '/'
+          }}
+        />
       ) : (
-        <Link key="Login" to="login" passHref>
-          <LinkItem menu={{ name: 'Login', icon: 'sign-in-alt' }} />
-        </Link>
+        <LinkItem
+          menu={{ name: 'Login', icon: 'sign-in-alt' }}
+          href="/api/login"
+        />
       )}
 
       {
@@ -84,3 +71,5 @@ export default function Navigation() {
     </nav>
   )
 }
+
+export default withCookies(Navigation)

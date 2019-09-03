@@ -10,21 +10,6 @@ const routes = [
     page: 'articleDetail',
   },
   {
-    pattern: '/about',
-    name: 'about',
-    page: 'about',
-  },
-  {
-    pattern: '/login',
-    name: 'login',
-    page: 'login',
-  },
-  {
-    pattern: '/account',
-    name: 'account',
-    page: 'account',
-  },
-  {
     pattern: '/playlists',
     name: 'playlists',
     page: 'playlists',
