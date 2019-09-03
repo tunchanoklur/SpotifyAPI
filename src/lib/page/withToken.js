@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useCookies } from 'react-cookie'
+
+const COOKIE_NAME = 'spotify-token'
 
 function findTokenInAsPath(asPath) {
   const parts = asPath.split('access_token=')
@@ -14,18 +16,31 @@ function findTokenInAsPath(asPath) {
 
 export default function withToken(PageComponent) {
   function EnhancedPageComponent(props) {
+    const [token, setToken] = useState(false)
+    const [cookies, setCookie] = useCookies([COOKIE_NAME])
     const { asPath } = useRouter()
-    const [cookies, setCookie] = useCookies(['spotify-token'])
 
-    const token = findTokenInAsPath(asPath)
+    useEffect(() => {
+      let token = cookies[COOKIE_NAME]
 
-    if (token) {
-      setCookie('spotify-token', token)
-    }
+      if (!token) {
+        const tokenFromHash = findTokenInAsPath(asPath)
+
+        if (tokenFromHash) {
+          setCookie(COOKIE_NAME, tokenFromHash)
+        }
+
+        token = tokenFromHash
+      }
+
+      if (token) {
+        setToken(token)
+      }
+    }, [asPath])
 
     const newProps = {
       ...props,
-      token: cookies['spotify-token'],
+      token,
     }
 
     return <PageComponent {...newProps} />
