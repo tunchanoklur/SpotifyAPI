@@ -1,11 +1,11 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { Flex, Box } from '@rebass/grid/emotion'
 
-import { FetchMore } from '@lib/api'
+// import { FetchMore } from '@lib/api'
 import withPage from '@lib/page/withPage'
-import * as ArticleService from '@features/article/data/services'
+// import * as ArticleService from '@features/article/data/services'
 
-import ArticleLatest, { ArticleList } from './ArticleLatest'
+// import ArticleLatest, { ArticleList } from './ArticleLatest'
 import { useCookies } from 'react-cookie'
 
 function HomePage() {
