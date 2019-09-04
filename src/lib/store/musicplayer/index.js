@@ -1,6 +1,7 @@
 import { observable, action } from 'mobx'
 
 export default class MusicPlayerStore {
+  @observable everPlay = false
   @observable playingSong = {}
   @observable playQueue = []
   @observable playing = false
@@ -15,6 +16,10 @@ export default class MusicPlayerStore {
 
   @action
   setPlaying(songInfo) {
+    if (this.everPlay === false) {
+      this.everPlay = true
+    }
+
     console.log('Play', songInfo)
     if (this.playingSong.id !== songInfo.id) {
       this.playingSong = songInfo

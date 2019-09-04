@@ -4,20 +4,20 @@ import { flowRight as compose } from 'lodash'
 import { inject, observer } from 'mobx-react'
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
 
-const playerStyles = {
-  position: 'fixed',
-  left: 0,
-  bottom: 0,
-  width: '100%',
-  padding: '10px 20px',
-  background: 'rgba(0, 0, 0, 80%)',
-  borderTop: '1px solid #eee',
-  color: '#aaa',
-}
-
 function MusicPlayer({ RootStore: { MusicPlayerStore } }) {
   return (
-    <div css={playerStyles}>
+    <div
+      css={{
+        display: MusicPlayerStore.everPlay ? 'block' : 'none',
+        position: 'fixed',
+        left: 0,
+        bottom: 0,
+        width: '100%',
+        padding: '10px 20px',
+        background: 'rgba(0, 0, 0, 80%)',
+        borderTop: '1px solid #eee',
+        color: '#aaa',
+      }}>
       <ReactPlayer
         css={{ display: 'none' }}
         width="0%"
