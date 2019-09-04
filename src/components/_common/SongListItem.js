@@ -20,7 +20,7 @@ function SongListItem({ track, RootStore: { MusicPlayerStore } }) {
           disabled={!track.preview_url}
           onClick={() => MusicPlayerStore.setPlaying(track)}
           css={{
-            padding: '0 0 0 11px',
+            padding: '0 0 0 9px',
             marginRight: '10px',
             borderRadius: '50%',
             backgroundColor: 'transparent',

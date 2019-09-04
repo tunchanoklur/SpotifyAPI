@@ -20,8 +20,8 @@ class MyApp extends App {
       <Fragment>
         <GlobalStyles />
         <Helmet titleTemplate={`%s - nextweb.js`} />
-        <MusicPlayer />
         <Component {...this.props.pageProps} router={router} />
+        <MusicPlayer />
       </Fragment>
     )
 

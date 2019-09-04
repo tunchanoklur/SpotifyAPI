@@ -4,11 +4,21 @@ import { flowRight as compose } from 'lodash'
 import { inject, observer } from 'mobx-react'
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
 
+const playerStyles = {
+  position: 'fixed',
+  left: 0,
+  bottom: 0,
+  width: '100%',
+  padding: '10px 20px',
+  backgroundColor: 'white',
+  borderTop: '1px solid #eee',
+}
+
 function MusicPlayer({ RootStore: { MusicPlayerStore } }) {
   return (
-    <div>
+    <div css={playerStyles}>
       <ReactPlayer
-        className="react-player"
+        css={{ display: 'none' }}
         width="0%"
         height="0%"
         url={MusicPlayerStore.playingSong.preview_url}
@@ -31,18 +41,24 @@ function MusicPlayer({ RootStore: { MusicPlayerStore } }) {
         onProgress={() => console.log('onProgress')}
         onDuration={() => console.log('onDuration')}
       />
-      <div css={{ width: '100%', backgroundColor: 'white' }}>
+      <div
+        css={{
+          width: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          fontSize: '16px',
+        }}>
         <button
           onClick={() => MusicPlayerStore.handlePlayPause()}
           css={{
-            padding: '0 0 0 11px',
+            padding: '0 0 0 7px',
             marginRight: '10px',
             borderRadius: '50%',
             backgroundColor: 'transparent',
             border: 'thin solid currentColor',
             justifyContent: 'center',
-            width: '40px',
-            height: '40px',
+            width: '30px',
+            height: '30px',
           }}>
           {MusicPlayerStore.playing ? (
             <Icon
