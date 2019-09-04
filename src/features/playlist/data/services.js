@@ -6,3 +6,6 @@ export function getFeaturedPlaylists({ token }) {
 export function getPlaylists({ token, id }) {
   return API.getPlaylists({ token, id })
 }
+export function getMyPlaylists({ token }) {
+  return API.getMyPlaylists({ token })
+}

@@ -15,3 +15,10 @@ export function getPlaylists(props) {
     token: props.token,
   })
 }
+
+export function getMyPlaylists(props) {
+  return fetchAPI({
+    path: `/me/playlists`,
+    token: props.token,
+  })
+}
