@@ -8,7 +8,7 @@ export default (restricted = false) => PageComponent => {
 
     useEffect(() => {
       if (restricted && !token) {
-        Router.pushRoute('login', {
+        Router.pushRoute('/', {
           redirect: props.router.asPath,
         })
       }

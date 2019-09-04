@@ -52,12 +52,7 @@ function Navigation({ cookies }) {
           <Icon icon="sign-out-alt" />
           Logout
         </a>
-      ) : (
-        <a href="/api/login" css={linkStyles}>
-          <Icon icon="sign-in-alt" />
-          Login
-        </a>
-      )}
+      ) : null}
     </nav>
   )
 }

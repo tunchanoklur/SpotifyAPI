@@ -6,9 +6,11 @@ import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
 
 function MusicPlayer({ RootStore: { MusicPlayerStore } }) {
   return (
-    <div className="player-wrapper">
+    <div>
       <ReactPlayer
         className="react-player"
+        width="0%"
+        height="0%"
         url={MusicPlayerStore.playingSong.preview_url}
         controls={false}
         playing={MusicPlayerStore.playing}

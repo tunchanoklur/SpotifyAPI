@@ -56,4 +56,4 @@ PlaylistsPage.getInitialProps = async function() {
   }
 }
 
-export default withPage()(PlaylistsPage)
+export default withPage({ restricted: true })(PlaylistsPage)

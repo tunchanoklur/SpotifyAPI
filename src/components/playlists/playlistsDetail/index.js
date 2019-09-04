@@ -45,4 +45,4 @@ PlaylistsDetailPage.getInitialProps = async ({ asPath, query }) => {
   }
 }
 
-export default withPage()(PlaylistsDetailPage)
+export default withPage({ restricted: true })(PlaylistsDetailPage)
