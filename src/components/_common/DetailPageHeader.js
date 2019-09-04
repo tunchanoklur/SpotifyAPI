@@ -3,7 +3,10 @@ import { Flex, Box } from '@rebass/grid/emotion'
 
 export function DetailPageHeader({ data }) {
   return (
-    <Flex flexWrap="wrap" width={1} css={{ backgroundColor: 'white' }}>
+    <Flex
+      flexWrap="wrap"
+      width={1}
+      css={{ backgroundColor: '#111', borderRadius: '5px' }}>
       <Box width={1 / 3} px={10}>
         <article css={{ margin: '35px' }}>
           <img src={data.images[0].url} />

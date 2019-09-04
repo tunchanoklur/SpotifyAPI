@@ -10,8 +10,9 @@ const playerStyles = {
   bottom: 0,
   width: '100%',
   padding: '10px 20px',
-  backgroundColor: 'white',
+  background: 'rgba(0, 0, 0, 80%)',
   borderTop: '1px solid #eee',
+  color: '#aaa',
 }
 
 function MusicPlayer({ RootStore: { MusicPlayerStore } }) {
@@ -59,6 +60,7 @@ function MusicPlayer({ RootStore: { MusicPlayerStore } }) {
             justifyContent: 'center',
             width: '30px',
             height: '30px',
+            color: '#555',
           }}>
           {MusicPlayerStore.playing ? (
             <Icon

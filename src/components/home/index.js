@@ -36,10 +36,12 @@ function HomePage() {
       <Fetch service={() => AlbumService.getNewReleases({ token })}>
         {({ data }) =>
           data.albums.items.map(album => (
-            <Box width={1 / 5} px={10} key={album.id}>
+            <Box width={1 / 5} px={10} py={10} key={album.id}>
               <article>
                 <img src={album.images[0].url} />
-                <p>{album.name}</p>
+                <h3 css={{ fontSize: '1rem', marginTop: '5px' }}>
+                  {album.name}
+                </h3>
               </article>
             </Box>
           ))

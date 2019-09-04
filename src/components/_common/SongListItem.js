@@ -7,10 +7,10 @@ function SongListItem({ track, RootStore: { MusicPlayerStore } }) {
   return (
     <div
       css={{
-        padding: '20px',
+        padding: '5px 20px',
         display: 'flex',
         minWidth: '95%',
-        borderStyle: 'outset',
+        color: '#bbb',
       }}>
       <span
         css={{
@@ -20,14 +20,15 @@ function SongListItem({ track, RootStore: { MusicPlayerStore } }) {
           disabled={!track.preview_url}
           onClick={() => MusicPlayerStore.setPlaying(track)}
           css={{
-            padding: '0 0 0 9px',
+            padding: '0 0 0 7px',
             marginRight: '10px',
             borderRadius: '50%',
             backgroundColor: 'transparent',
             border: 'thin solid currentColor',
             justifyContent: 'center',
-            width: '40px',
-            height: '40px',
+            width: '30px',
+            height: '30px',
+            color: '#555',
           }}>
           {track.id === MusicPlayerStore.playingSong.id &&
           MusicPlayerStore.playing ? (
@@ -68,6 +69,9 @@ function SongListItem({ track, RootStore: { MusicPlayerStore } }) {
       <span
         css={{
           width: '15%',
+          alignSelf: 'center',
+          fontSize: '0.8em',
+          color: '#888',
         }}>
         {transformDuration(track.duration_ms)}
       </span>
