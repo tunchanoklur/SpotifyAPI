@@ -1,26 +1,28 @@
 import { observable, action } from 'mobx'
-import get from 'lodash/get'
 
 export default class MusicPlayerStore {
   @observable playingSong = {}
-  playQueue = []
-  playing = false
-  controls = false
-  volume = 0.8
-  muted = false
-  played = 0
-  loaded = 0
-  duration = 0
-  playbackRate = 1.0
-  loop = false
+  @observable playQueue = []
+  @observable playing = false
+  @observable controls = false
+  @observable volume = 0.5
+  @observable muted = false
+  @observable played = 0
+  @observable loaded = 0
+  @observable duration = 0
+  @observable playbackRate = 1.0
+  @observable loop = false
 
   @action
   setPlaying(songInfo) {
     console.log('Play', songInfo)
-    this.playingSong = songInfo
-    this.playing = true
-    this.controls = true
-    this.setStart()
+    if (this.playingSong.id !== songInfo.id) {
+      this.playingSong = songInfo
+      this.playing = true
+      this.setStart()
+    } else {
+      this.handlePlayPause()
+    }
   }
 
   @action

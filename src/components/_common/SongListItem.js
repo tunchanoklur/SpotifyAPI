@@ -29,7 +29,8 @@ function SongListItem({ track, RootStore: { MusicPlayerStore } }) {
             width: '40px',
             height: '40px',
           }}>
-          {track.id === MusicPlayerStore.playingSong.id ? (
+          {track.id === MusicPlayerStore.playingSong.id &&
+          MusicPlayerStore.playing ? (
             <Icon
               icon="pause"
               css={{
