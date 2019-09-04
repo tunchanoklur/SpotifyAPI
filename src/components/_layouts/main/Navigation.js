@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { Fragment, useContext } from 'react'
 import { withCookies } from 'react-cookie'
 import { Link } from '@router'
 import { userContext, AUTH_COOKIE_NAME } from '@lib/auth'
@@ -10,11 +10,6 @@ const mainMenus = [
     name: 'Home',
     route: 'home',
     icon: 'home',
-  },
-  {
-    name: 'Playlists',
-    route: 'playlists',
-    icon: 'users',
   },
 ]
 
@@ -42,17 +37,25 @@ function Navigation({ cookies }) {
         </Link>
       ))}
 
-      {token ? (
-        <a
-          css={linkStyles}
-          onClick={() => {
-            cookies.remove(AUTH_COOKIE_NAME)
-            location.href = '/'
-          }}>
-          <Icon icon="sign-out-alt" />
-          Logout
-        </a>
-      ) : null}
+      {token && (
+        <Fragment>
+          <Link key="Playlists" to="playlists" passHref>
+            <a css={linkStyles}>
+              <Icon icon="users" />
+              Playlists
+            </a>
+          </Link>
+          <a
+            css={linkStyles}
+            onClick={() => {
+              cookies.remove(AUTH_COOKIE_NAME)
+              location.href = '/'
+            }}>
+            <Icon icon="sign-out-alt" />
+            Logout
+          </a>
+        </Fragment>
+      )}
     </nav>
   )
 }
