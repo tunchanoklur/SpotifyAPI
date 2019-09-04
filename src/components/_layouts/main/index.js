@@ -4,6 +4,7 @@ import Notifications from './Notifications'
 import Navigation from './Navigation'
 import Breadcrumb from './Breadcrumb'
 import { breakpoints, Responsive, Adaptive } from '@lib/styles'
+import MusicPlayer from '@components/_common/MusicPlayer'
 
 const theme = {
   breakpoints: Object.keys(breakpoints).map(key => breakpoints[key]),
@@ -21,6 +22,7 @@ export default function MainLayout({ children, breadcrumb }) {
           wide={<Breadcrumb data={breadcrumb} />}
         /> */}
         <Adaptive narrow={null} wide={<Breadcrumb data={breadcrumb} />} />
+        <MusicPlayer />
         <main>{children}</main>
       </div>
     </ThemeProvider>

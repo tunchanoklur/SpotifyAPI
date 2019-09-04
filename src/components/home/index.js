@@ -5,7 +5,6 @@ import { Fetch } from '@lib/api'
 import withPage from '@lib/page/withPage'
 import { userContext } from '@lib/page/withAuth'
 import * as AlbumService from '@features/album/data/services'
-import { MusicPlayer } from '@components/_common/MusicPlayer'
 
 function HomePage() {
   const { token } = useContext(userContext)
@@ -14,7 +13,6 @@ function HomePage() {
 
   return (
     <Flex flexWrap="wrap">
-      <MusicPlayer />
       <Fetch service={() => AlbumService.getNewReleases({ token })}>
         {({ data }) =>
           data.albums.items.map(album => (

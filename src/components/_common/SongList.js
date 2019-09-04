@@ -1,6 +1,6 @@
 import React from 'react'
-import { Flex, Box } from '@rebass/grid/emotion'
-import { SongListItem } from './SongListItem'
+import { Flex } from '@rebass/grid/emotion'
+import SongListItem from './SongListItem'
 
 export function SongList({ tracks }) {
   return (

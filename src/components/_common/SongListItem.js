@@ -1,7 +1,9 @@
 import React from 'react'
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
+import { flowRight as compose } from 'lodash'
+import { inject, observer } from 'mobx-react'
 
-export function SongListItem({ track }) {
+function SongListItem({ track, RootStore: { MusicPlayerStore } }) {
   return (
     <div
       css={{
@@ -15,6 +17,8 @@ export function SongListItem({ track }) {
           width: '5%',
         }}>
         <button
+          disabled={!track.preview_url}
+          onClick={() => MusicPlayerStore.setPlaying(track)}
           css={{
             padding: '0 0 0 11px',
             marginRight: '10px',
@@ -25,17 +29,31 @@ export function SongListItem({ track }) {
             width: '40px',
             height: '40px',
           }}>
-          <Icon
-            icon="play"
-            css={{
-              alignItems: 'center',
-              display: 'flex',
-              flex: '1 0 auto',
-              justifyContent: 'inherit',
-              lineHeight: 'normal',
-              position: 'relative',
-            }}
-          />
+          {track.id === MusicPlayerStore.playingSong.id ? (
+            <Icon
+              icon="pause"
+              css={{
+                alignItems: 'center',
+                display: 'flex',
+                flex: '1 0 auto',
+                justifyContent: 'inherit',
+                lineHeight: 'normal',
+                position: 'relative',
+              }}
+            />
+          ) : (
+            <Icon
+              icon="play"
+              css={{
+                alignItems: 'center',
+                display: 'flex',
+                flex: '1 0 auto',
+                justifyContent: 'inherit',
+                lineHeight: 'normal',
+                position: 'relative',
+              }}
+            />
+          )}
         </button>
       </span>
 
@@ -63,3 +81,8 @@ function transformDuration(ms) {
   const s = ms % 60
   return `${m <= 9 ? '0' : ''}${m}:${s <= 9 ? '0' : ''}${s}`
 }
+
+export default compose(
+  inject('RootStore'),
+  observer,
+)(SongListItem)

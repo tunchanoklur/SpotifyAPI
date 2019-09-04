@@ -1,17 +1,34 @@
-import React, { Component } from 'react'
+import React from 'react'
 import ReactPlayer from 'react-player'
+import { flowRight as compose } from 'lodash'
+import { inject, observer } from 'mobx-react'
 
-export class MusicPlayer extends Component {
-  render() {
-    return (
-      <div className="player-wrapper">
-        <ReactPlayer
-          className="react-player"
-          url="https://p.scdn.co/mp3-preview/fe0ac4051d936b57c793013e5fa342c3173af52a?cid=d57ab4103ced402191e4d0b305a3c241"
-          controls
-          playing
-        />
-      </div>
-    )
-  }
+function MusicPlayer({ RootStore: { MusicPlayerStore } }) {
+  const {
+    loop,
+    muted,
+    playbackRate,
+    volume,
+    playing,
+    playingSong,
+  } = MusicPlayerStore
+  return (
+    <div className="player-wrapper">
+      <ReactPlayer
+        className="react-player"
+        url={playingSong.preview_url}
+        controls
+        playing={playing}
+        loop={loop}
+        playbackRate={playbackRate}
+        volume={volume}
+        muted={muted}
+      />
+    </div>
+  )
 }
+
+export default compose(
+  inject('RootStore'),
+  observer,
+)(MusicPlayer)
