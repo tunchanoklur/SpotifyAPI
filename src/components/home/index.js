@@ -3,7 +3,7 @@ import { Flex, Box } from '@rebass/grid/emotion'
 
 import { Fetch } from '@lib/api'
 import withPage from '@lib/page/withPage'
-import { userContext } from '@lib/page/withAuth'
+import { userContext } from '@lib/auth'
 import * as AlbumService from '@features/album/data/services'
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
 import { Link } from '@router'
@@ -20,7 +20,7 @@ const loginButton = {
 function HomePage() {
   const { token } = useContext(userContext)
 
-  if (!token)
+  if (!token) {
     return (
       <Link to="/api/login">
         <button css={loginButton}>
@@ -29,6 +29,7 @@ function HomePage() {
         </button>
       </Link>
     )
+  }
 
   return (
     <Flex flexWrap="wrap">

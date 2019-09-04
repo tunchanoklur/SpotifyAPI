@@ -5,6 +5,7 @@ import { flowRight as compose } from 'lodash'
 
 import { withFontLoader } from '@lib/font'
 import { withUA } from '@lib/userAgent'
+import { withAuth } from '@lib/auth'
 import withMobX from '@lib/store/withMobX'
 
 import { GlobalStyles } from '@lib/styles'
@@ -34,6 +35,7 @@ class MyApp extends App {
 
 export default compose(
   withUA,
+  withAuth,
   withMobX,
   withFontLoader,
 )(MyApp)

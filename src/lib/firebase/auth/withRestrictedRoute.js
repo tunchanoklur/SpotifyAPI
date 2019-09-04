@@ -1,13 +1,13 @@
 import React, { useEffect, useContext } from 'react'
 import { Router } from '@router'
-import { userContext } from '@lib/page/withAuth'
+import { userContext } from '@lib/auth'
 
 export default (restricted = false) => PageComponent => {
   function EnhancedPageComponent(props) {
     const { token } = useContext(userContext)
 
     useEffect(() => {
-      if (restricted && !token) {
+      if (restricted && token === false) {
         Router.pushRoute('/', {
           redirect: props.router.asPath,
         })

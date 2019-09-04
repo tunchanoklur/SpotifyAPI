@@ -16,9 +16,9 @@ function findTokenInAsPath(asPath) {
   return false
 }
 
-export default function withToken(PageComponent) {
+export default function withAuth(PageComponent) {
   function EnhancedPageComponent(props) {
-    const [token, setToken] = useState(false)
+    const [token, setToken] = useState(null)
     const [cookies, setCookie] = useCookies([AUTH_COOKIE_NAME])
     const { asPath } = useRouter()
 
@@ -35,9 +35,7 @@ export default function withToken(PageComponent) {
         token = tokenFromHash
       }
 
-      if (token) {
-        setToken(token)
-      }
+      setToken(token || false)
     }, [asPath])
 
     const userData = {

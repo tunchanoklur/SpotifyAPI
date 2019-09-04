@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { withCookies } from 'react-cookie'
 import { Link } from '@router'
-import { userContext, AUTH_COOKIE_NAME } from '@lib/page/withAuth'
+import { userContext, AUTH_COOKIE_NAME } from '@lib/auth'
 import { media } from '@lib/styles'
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
 

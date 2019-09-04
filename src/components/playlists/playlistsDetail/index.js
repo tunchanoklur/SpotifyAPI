@@ -3,7 +3,7 @@ import { Flex } from '@rebass/grid/emotion'
 
 import { Fetch } from '@lib/api'
 import withPage from '@lib/page/withPage'
-import { userContext } from '@lib/page/withAuth'
+import { userContext } from '@lib/auth'
 import * as PlaylistsService from '@features/playlist/data/services'
 import { DetailPageHeader } from '@components/_common/DetailPageHeader'
 import { SongList } from '@components/_common/SongList'
