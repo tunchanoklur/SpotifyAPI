@@ -16,6 +16,18 @@ function MusicPlayer({ RootStore: { MusicPlayerStore } }) {
         playbackRate={MusicPlayerStore.playbackRate}
         volume={MusicPlayerStore.volume}
         muted={MusicPlayerStore.muted}
+        onReady={() => console.log('onReady')}
+        onStart={() => console.log('onStart')}
+        onPlay={() => console.log('onPlay')}
+        onEnablePIP={() => console.log('onEnablePip')}
+        onDisablePIP={() => console.log('onDisablePip')}
+        onPause={() => console.log('onPause')}
+        onBuffer={() => console.log('onBuffer')}
+        onSeek={() => console.log('onSeek')}
+        onEnded={() => MusicPlayerStore.handlePlayPause()}
+        onError={() => console.log('onError')}
+        onProgress={() => console.log('onProgress')}
+        onDuration={() => console.log('onDuration')}
       />
       <div css={{ width: '100%', backgroundColor: 'white' }}>
         <button

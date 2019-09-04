@@ -9,6 +9,7 @@ import withMobX from '@lib/store/withMobX'
 
 import { GlobalStyles } from '@lib/styles'
 import { CookiesProvider } from 'react-cookie'
+import MusicPlayer from '@components/_common/MusicPlayer'
 
 class MyApp extends App {
   render() {
@@ -18,6 +19,7 @@ class MyApp extends App {
       <Fragment>
         <GlobalStyles />
         <Helmet titleTemplate={`%s - nextweb.js`} />
+        <MusicPlayer />
         <Component {...this.props.pageProps} router={router} />
       </Fragment>
     )

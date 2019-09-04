@@ -29,32 +29,39 @@ export default class MusicPlayerStore {
   setStart() {
     this.played = 0
   }
+
   @action
   handlePlayPause() {
     this.playing = !this.playing
     console.log('playing: ', this.playing)
   }
+
   @action
   handleLoop() {
     this.loop = !this.loop
   }
+
   @action
   handleVolume(e) {
     this.volume = parseFloat(e.target.value)
   }
+
   @action
   handleMuted() {
     this.muted = !this.muted
   }
+
   @action
   handlePlaybackRate(e) {
     this.playbackRate = parseFloat(e.target.value)
   }
+
   @action
   handleEnded() {
     console.log('onEnded')
     this.setState({ playing: this.state.loop })
   }
+
   @action
   setDuration(duration) {
     console.log('onDuration', duration)
