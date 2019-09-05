@@ -74,12 +74,46 @@ function SongListItem({ track, RootStore: { MusicPlayerStore } }) {
       </span>
       <span
         css={{
-          width: '15%',
+          width: '10%',
           alignSelf: 'center',
           fontSize: '0.8em',
           color: '#888',
         }}>
         {transformDuration(track.duration_ms)}
+      </span>
+      <span
+        css={{
+          width: '5%',
+          alignSelf: 'center',
+        }}>
+        <button
+          disabled={!track.preview_url}
+          onClick={() => MusicPlayerStore.addToQueue(track)}
+          css={css`
+            margin-right: 10px;
+            border: transparent;
+            background-color: transparent;
+            width: 30px;
+            height: 30px;
+            color: #555;
+            cursor: pointer;
+            &:disabled {
+              color: #262626;
+              cursor: default;
+            }
+          `}>
+          <Icon
+            icon="plus"
+            css={{
+              alignItems: 'center',
+              display: 'flex',
+              flex: '1 0 auto',
+              justifyContent: 'inherit',
+              lineHeight: 'normal',
+              position: 'relative',
+            }}
+          />
+        </button>
       </span>
     </div>
   )

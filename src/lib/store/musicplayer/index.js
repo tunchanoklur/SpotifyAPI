@@ -45,13 +45,23 @@ export default class MusicPlayerStore {
     this.playedSec = 0
     this.loadedSec = 0
   }
-
+  @action
+  addToQueue(track) {
+    this.playQueue.push(track)
+    console.log(this.playQueue)
+  }
   @action
   handlePlayPause() {
     this.playing = !this.playing
     console.log('playing: ', this.playing)
   }
-
+  @action
+  handleSongEnd() {
+    this.handlePlayPause()
+    if (this.playQueue.length !== 0) {
+      this.setPlaying(this.playQueue[0])
+    }
+  }
   @action
   handleLoop() {
     this.loop = !this.loop

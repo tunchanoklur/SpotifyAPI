@@ -40,7 +40,7 @@ function MusicPlayer({ RootStore: { MusicPlayerStore } }) {
         onPause={() => console.log('onPause')}
         onBuffer={() => console.log('onBuffer')}
         onSeek={() => console.log('onSeek')}
-        onEnded={() => MusicPlayerStore.handlePlayPause()}
+        onEnded={() => MusicPlayerStore.handleSongEnd()}
         onError={() => console.log('onError')}
         onProgress={info => MusicPlayerStore.handlePlayedTime(info)}
         onDuration={() => console.log('onDuration')}
