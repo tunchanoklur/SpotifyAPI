@@ -30,6 +30,7 @@ export default function withAuth(PageComponent) {
 
         if (tokenFromHash) {
           setCookie(AUTH_COOKIE_NAME, tokenFromHash, { maxAge: 60 * 60 })
+          history.pushState({}, '', '/')
         }
 
         token = tokenFromHash
