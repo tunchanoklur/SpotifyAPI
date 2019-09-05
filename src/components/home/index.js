@@ -1,53 +1,59 @@
-import React, { Fragment } from 'react'
+import React, { useContext } from 'react'
 import { Flex, Box } from '@rebass/grid/emotion'
 
-import { FetchMore } from '@lib/api'
+import { Fetch } from '@lib/api'
 import withPage from '@lib/page/withPage'
-import * as ArticleService from '@features/article/data/services'
+import { userContext } from '@lib/auth'
+import * as AlbumService from '@features/album/data/services'
+import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
+import { Link } from '@router'
 
-import ArticleLatest, { ArticleList } from './ArticleLatest'
+const loginButton = {
+  display: 'inline-box',
+  justifyContent: 'center',
+  backgroundColor: '#5cbbf6 !important',
+  borderColor: '#5cbbf6 !important',
+  width: '100%',
+  height: '300px',
+  fontSize: '60px',
+}
+function HomePage() {
+  const { token } = useContext(userContext)
 
-function HomePage({ articleLatest }) {
+  if (!token) {
+    return (
+      <Link to="/api/login">
+        <button css={loginButton}>
+          <Icon icon="sign-in-alt" css={{ width: '60px', height: '60px' }} />
+          Login
+        </button>
+      </Link>
+    )
+  }
+
   return (
     <Flex flexWrap="wrap">
-      <Box width={[1, 2 / 3]} pr={[0, 20]}>
-        <ArticleLatest data={articleLatest} />
-
-        <FetchMore
-          service={({ start, limit }) =>
-            ArticleService.getArticles({ start, limit })
-          }
-          start={5}
-          limit={5}>
-          {({ data, fetchMore, isLoading, isDone }) => {
-            return (
-              <Fragment>
-                <ArticleList data={data} />
-
-                {!isDone && (
-                  <button onClick={fetchMore}>
-                    {isLoading ? 'Loading...' : 'Load More'}
-                  </button>
-                )}
-              </Fragment>
-            )
-          }}
-        </FetchMore>
-      </Box>
-
-      <Box width={[1, 1 / 3]} pl={[0, 20]}>
-        <div>Sidebar</div>
-      </Box>
+      <Fetch service={() => AlbumService.getNewReleases({ token })}>
+        {({ data }) =>
+          data.albums.items.map(album => (
+            <Box width={1 / 5} px={10} py={10} key={album.id}>
+              <article>
+                <img src={album.images[0].url} />
+                <h3 css={{ fontSize: '1rem', marginTop: '5px' }}>
+                  {album.name}
+                </h3>
+              </article>
+            </Box>
+          ))
+        }
+      </Fetch>
     </Flex>
   )
 }
 
 HomePage.getInitialProps = async () => {
-  const articleLatest = await ArticleService.getLatestArticles()
-
   return {
     title: 'Home',
-    articleLatest,
   }
 }
 
