@@ -2,6 +2,7 @@ import React from 'react'
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
 import { flowRight as compose } from 'lodash'
 import { inject, observer } from 'mobx-react'
+import { css } from '@emotion/core'
 
 function SongListItem({ track, RootStore: { MusicPlayerStore } }) {
   return (
@@ -19,17 +20,22 @@ function SongListItem({ track, RootStore: { MusicPlayerStore } }) {
         <button
           disabled={!track.preview_url}
           onClick={() => MusicPlayerStore.setPlaying(track)}
-          css={{
-            padding: '0 0 0 7px',
-            marginRight: '10px',
-            borderRadius: '50%',
-            backgroundColor: 'transparent',
-            border: 'thin solid currentColor',
-            justifyContent: 'center',
-            width: '30px',
-            height: '30px',
-            color: '#555',
-          }}>
+          css={css`
+            padding: 0 0 0 7px;
+            margin-right: 10px;
+            border-radius: 50%;
+            background-color: transparent;
+            border: thin solid currentColor;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            color: #555;
+            cursor: pointer;
+            &:disabled {
+              color: #262626;
+              cursor: default;
+            }
+          `}>
           {track.id === MusicPlayerStore.playingSong.id &&
           MusicPlayerStore.playing ? (
             <Icon
