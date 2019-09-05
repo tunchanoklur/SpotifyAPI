@@ -3,7 +3,7 @@ import ReactPlayer from 'react-player'
 import { flowRight as compose } from 'lodash'
 import { inject, observer } from 'mobx-react'
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
-
+import get from 'lodash/get'
 function MusicPlayer({ RootStore: { MusicPlayerStore } }) {
   return (
     <div
@@ -60,7 +60,7 @@ function MusicPlayer({ RootStore: { MusicPlayerStore } }) {
             height: '50px',
             color: '#555',
           }}
-          src={MusicPlayerStore.playingSong.album.images[0].url}
+          src={get(MusicPlayerStore, 'playingSong.album.images[0].url', '')}
         />
         <button
           onClick={() => MusicPlayerStore.handlePlayPause()}
