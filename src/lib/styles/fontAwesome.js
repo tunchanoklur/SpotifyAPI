@@ -12,6 +12,10 @@ import {
   faUsers,
   faPlay,
   faPause,
+  faSyncAlt,
+  faVolumeUp,
+  faVolumeMute,
+  faVolumeDown,
 } from '@fortawesome/free-solid-svg-icons'
 
 config.autoAddCss = false
@@ -29,4 +33,8 @@ library.add(
   faUsers,
   faPlay,
   faPause,
+  faSyncAlt,
+  faVolumeUp,
+  faVolumeMute,
+  faVolumeDown,
 )

@@ -4,6 +4,8 @@ import { flowRight as compose } from 'lodash'
 import { inject, observer } from 'mobx-react'
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
 import get from 'lodash/get'
+import { css } from '@emotion/core'
+
 function MusicPlayer({ RootStore: { MusicPlayerStore } }) {
   return (
     <div
@@ -48,6 +50,7 @@ function MusicPlayer({ RootStore: { MusicPlayerStore } }) {
           display: 'flex',
           alignItems: 'center',
           fontSize: '16px',
+          flexWrap: 'wrap',
         }}>
         <img
           css={{
@@ -59,6 +62,7 @@ function MusicPlayer({ RootStore: { MusicPlayerStore } }) {
             width: '50px',
             height: '50px',
             color: '#555',
+            animation: 'imgRotate 15s linear infinite',
           }}
           src={get(MusicPlayerStore, 'playingSong.album.images[0].url', '')}
         />
@@ -102,6 +106,68 @@ function MusicPlayer({ RootStore: { MusicPlayerStore } }) {
           )}
         </button>
         {MusicPlayerStore.playingSong.name}
+        <span
+          css={css`
+             {
+              width: 20%;
+              margin: auto;
+            }
+          `}>
+          <Icon
+            icon={
+              MusicPlayerStore.volume === 0
+                ? 'volume-mute'
+                : MusicPlayerStore.volume <= 0.75
+                ? 'volume-down'
+                : 'volume-up'
+            }
+            css={{ position: 'absolute', width: '30px' }}
+          />
+          <input
+            css={css`
+               {
+                -webkit-appearance: none;
+                margin-left: 25px;
+                width: 50%;
+                height: 15px;
+                border-radius: 5px;
+                background: #d3d3d3;
+                outline: none;
+                opacity: 0.7;
+                -webkit-transition: 0.2s;
+                transition: opacity 0.2s;
+                justify-content: flex-end;
+                &:hover {
+                  opacity: 1;
+                }
+
+                &::-webkit-slider-thumb {
+                  -webkit-appearance: none;
+                  appearance: none;
+                  width: 20px;
+                  height: 20px;
+                  border-radius: 50%;
+                  background: #1ed761;
+                  cursor: pointer;
+                }
+
+                &::-moz-range-thumb {
+                  width: 20px;
+                  height: 20px;
+                  border-radius: 50%;
+                  background: #1ed761;
+                  cursor: pointer;
+                }
+              }
+            `}
+            type="range"
+            min={0}
+            max={1}
+            step="any"
+            value={MusicPlayerStore.volume}
+            onChange={e => MusicPlayerStore.handleVolume(e)}
+          />
+        </span>
       </div>
     </div>
   )
