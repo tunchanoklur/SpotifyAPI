@@ -29,7 +29,7 @@ export default function withAuth(PageComponent) {
         const tokenFromHash = findTokenInAsPath(asPath)
 
         if (tokenFromHash) {
-          setCookie(AUTH_COOKIE_NAME, tokenFromHash)
+          setCookie(AUTH_COOKIE_NAME, tokenFromHash, { maxAge: 60 * 60 })
         }
 
         token = tokenFromHash
