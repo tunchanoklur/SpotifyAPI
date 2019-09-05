@@ -7,7 +7,7 @@ import { userContext } from '@lib/auth'
 import * as AlbumService from '@features/album/data/services'
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
 import { Link } from '@router'
-
+import { getStatic } from '@lib/static'
 const loginButton = {
   display: 'inline-box',
   justifyContent: 'center',
@@ -34,7 +34,7 @@ function HomePage() {
       <Flex flexWrap="wrap">
         <img
           css={logoStyle}
-          src="https://www.stickpng.com/assets/images/59b5bb466dbe923c39853e00.png"
+          src={getStatic('spotify/spotifyLogo.png')}
           alt={'SpotifyLogo'}
         />
         <Link to="/api/login">
