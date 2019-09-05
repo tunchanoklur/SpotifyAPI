@@ -6,6 +6,8 @@ import { inject, observer } from 'mobx-react'
 
 import withPage from '@lib/page/withPage'
 
+import { DatePicker } from 'antd'
+
 function AboutPage({ RootStore: { uiStore } }) {
   const { dimensions, orientation } = uiStore
 
@@ -20,6 +22,9 @@ function AboutPage({ RootStore: { uiStore } }) {
         <p>width: {dimensions.width}</p>
         <p>height: {dimensions.height}</p>
         <p>Orientation: {orientation}</p>
+      </Box>
+      <Box>
+        <DatePicker name="startDate" />
       </Box>
     </Flex>
   )

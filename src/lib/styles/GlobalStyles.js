@@ -4,12 +4,25 @@ import { css, Global } from '@emotion/core'
 const baseStyles = css`
   html,
   body {
-    padding: 3rem 1rem;
+    padding: 20px;
+    color: #888;
     margin: 0;
-    background: papayawhip;
+    background: #000;
     min-height: 100%;
     font-family: 'Open Sans', sans-serif;
-    font-size: 24px;
+    font-size: 16px;
+  }
+  h1 {
+    font-size: 1.3rem;
+  }
+  a {
+    color: #888;
+    text-decoration: none;
+  }
+  img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
   }
 `
 
