@@ -49,6 +49,19 @@ function MusicPlayer({ RootStore: { MusicPlayerStore } }) {
           alignItems: 'center',
           fontSize: '16px',
         }}>
+        <img
+          css={{
+            marginRight: '10px',
+            borderRadius: '50%',
+            backgroundColor: 'transparent',
+            border: 'thin solid currentColor',
+            justifyContent: 'center',
+            width: '50px',
+            height: '50px',
+            color: '#555',
+          }}
+          src={MusicPlayerStore.playingSong.album.images[0].url}
+        />
         <button
           onClick={() => MusicPlayerStore.handlePlayPause()}
           css={{
