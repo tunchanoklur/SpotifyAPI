@@ -21,6 +21,7 @@ function MusicPlayer({ RootStore: { MusicPlayerStore } }) {
         color: '#aaa',
       }}>
       <ReactPlayer
+        ref={MusicPlayerStore.ref}
         css={{ display: 'none' }}
         width="0%"
         height="0%"
@@ -41,7 +42,7 @@ function MusicPlayer({ RootStore: { MusicPlayerStore } }) {
         onSeek={() => console.log('onSeek')}
         onEnded={() => MusicPlayerStore.handlePlayPause()}
         onError={() => console.log('onError')}
-        onProgress={() => console.log('onProgress')}
+        onProgress={info => MusicPlayerStore.handlePlayedTime(info)}
         onDuration={() => console.log('onDuration')}
       />
       <div
@@ -109,8 +110,71 @@ function MusicPlayer({ RootStore: { MusicPlayerStore } }) {
         <span
           css={css`
              {
+              width: 30%;
+              margin-left: 20px;
+              justify-content: flex-end;
+              position: relative;
+            }
+          `}>
+          <progress
+            css={{
+              justifyContent: 'flex-end',
+              width: '70%',
+              position: 'absolute',
+              zIndex: '-1',
+            }}
+            value={MusicPlayerStore.played}
+            max={1}
+          />
+          <input
+            css={css`
+               {
+                -webkit-appearance: none;
+                width: 70%;
+                height: 15px;
+                border-radius: 5px;
+                outline: none;
+                -webkit-transition: 0.2s;
+                transition: opacity 0.2s;
+                justify-content: flex-end;
+                background: transparent;
+                &::-webkit-slider-thumb {
+                  -webkit-appearance: none;
+                  appearance: none;
+                  width: 20px;
+                  height: 20px;
+                  border-radius: 50%;
+                  background: #1ed761;
+                  cursor: pointer;
+                }
+
+                &::-moz-range-thumb {
+                  width: 20px;
+                  height: 20px;
+                  border-radius: 50%;
+                  background: #1ed761;
+                  cursor: pointer;
+                }
+              }
+            `}
+            type="range"
+            min={0}
+            max={1}
+            step="any"
+            value={MusicPlayerStore.played}
+            onMouseDown={e => MusicPlayerStore.handleSeekMouseDown(e)}
+            onChange={e => MusicPlayerStore.handleSeekChange(e)}
+            onMouseUp={e => MusicPlayerStore.handleSeekMouseUp(e)}
+          />
+          {MusicPlayerStore.playedDuration}
+        </span>
+        <span
+          css={css`
+             {
               width: 20%;
               margin: auto;
+              justify-content: flex-end;
+              position: relative;
             }
           `}>
           <Icon

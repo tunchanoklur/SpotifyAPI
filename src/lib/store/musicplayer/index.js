@@ -1,4 +1,5 @@
-import { observable, action } from 'mobx'
+import { observable, action, computed } from 'mobx'
+import { transformDuration } from '@components/_common/timeTransformer'
 
 export default class MusicPlayerStore {
   @observable everPlay = false
@@ -10,9 +11,16 @@ export default class MusicPlayerStore {
   @observable muted = false
   @observable played = 0
   @observable loaded = 0
+  @observable playedSec = 0
+  @observable loadedSec = 0
   @observable duration = 0
   @observable playbackRate = 1.0
   @observable loop = false
+  @observable seeking = false
+
+  @observable ref = player => {
+    this.player = player
+  }
 
   @action
   setPlaying(songInfo) {
@@ -33,6 +41,9 @@ export default class MusicPlayerStore {
   @action
   setStart() {
     this.played = 0
+    this.loaded = 0
+    this.playedSec = 0
+    this.loadedSec = 0
   }
 
   @action
@@ -71,5 +82,30 @@ export default class MusicPlayerStore {
   setDuration(duration) {
     console.log('onDuration', duration)
     this.duration = duration
+  }
+  @action
+  handleSeekChange(e) {
+    this.played = parseFloat(e.target.value)
+  }
+  @action
+  handleSeekMouseDown(e) {
+    this.seeking = true
+  }
+  @action
+  handleSeekMouseUp(e) {
+    this.seeking = false
+    this.player.seekTo(parseFloat(e.target.value))
+  }
+  @action
+  handlePlayedTime(info) {
+    this.loaded = info.loaded
+    this.loadedSec = info.loadedSeconds
+    this.played = info.played
+    this.playedSec = info.playedSeconds
+  }
+
+  @computed
+  get playedDuration() {
+    return `  ${transformDuration(this.playedSec * 1000)}`
   }
 }

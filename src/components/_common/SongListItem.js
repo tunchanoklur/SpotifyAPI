@@ -3,7 +3,7 @@ import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
 import { flowRight as compose } from 'lodash'
 import { inject, observer } from 'mobx-react'
 import { css } from '@emotion/core'
-
+import { transformDuration } from '@components/_common/timeTransformer'
 function SongListItem({ track, RootStore: { MusicPlayerStore } }) {
   return (
     <div
@@ -83,14 +83,6 @@ function SongListItem({ track, RootStore: { MusicPlayerStore } }) {
       </span>
     </div>
   )
-}
-
-function transformDuration(ms) {
-  ms /= 1000
-  ms = Math.round(ms)
-  const m = Math.round(ms / 60)
-  const s = ms % 60
-  return `${m <= 9 ? '0' : ''}${m}:${s <= 9 ? '0' : ''}${s}`
 }
 
 export default compose(
