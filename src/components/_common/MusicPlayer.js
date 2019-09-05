@@ -117,12 +117,27 @@ function MusicPlayer({ RootStore: { MusicPlayerStore } }) {
             }
           `}>
           <progress
-            css={{
-              justifyContent: 'flex-end',
-              width: '70%',
-              position: 'absolute',
-              zIndex: '-1',
-            }}
+            css={css`
+               {
+                -webkit-appearance: none;
+                appearance: none;
+                justify-content: flex-end;
+                width: 70%;
+                position: absolute;
+                z-index: -1;
+                background-color: transparent;
+                transition: width 0.6s ease;
+                color: #d3d3d3;
+                &::-webkit-progress-bar {
+                  border-radius: 5px;
+                }
+                &::-webkit-progress-value {
+                  background: #12813a;
+                  padding-left: 20px;
+                  border-radius: 5px;
+                }
+              }
+            `}
             value={MusicPlayerStore.played}
             max={1}
           />
@@ -132,7 +147,6 @@ function MusicPlayer({ RootStore: { MusicPlayerStore } }) {
                 -webkit-appearance: none;
                 width: 70%;
                 height: 15px;
-                border-radius: 5px;
                 outline: none;
                 -webkit-transition: 0.2s;
                 transition: opacity 0.2s;
