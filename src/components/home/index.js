@@ -11,23 +11,39 @@ import { Link } from '@router'
 const loginButton = {
   display: 'inline-box',
   justifyContent: 'center',
-  backgroundColor: '#5cbbf6 !important',
-  borderColor: '#5cbbf6 !important',
-  width: '100%',
-  height: '300px',
-  fontSize: '60px',
+  backgroundColor: '#1ed761 !important',
+  borderColor: '#1ed761 !important',
+  width: '50%',
+  height: '60px',
+  borderRadius: '28px',
+  fontSize: '35px',
+  cursor: 'pointer',
+  margin: 'auto',
+}
+const logoStyle = {
+  display: 'block',
+  paddingBottom: '30px',
+  width: '60%',
+  margin: 'auto',
 }
 function HomePage() {
   const { token } = useContext(userContext)
 
   if (!token) {
     return (
-      <Link to="/api/login">
-        <button css={loginButton}>
-          <Icon icon="sign-in-alt" css={{ width: '60px', height: '60px' }} />
-          Login
-        </button>
-      </Link>
+      <Flex flexWrap="wrap">
+        <img
+          css={logoStyle}
+          src="https://www.stickpng.com/assets/images/59b5bb466dbe923c39853e00.png"
+          alt={'SpotifyLogo'}
+        />
+        <Link to="/api/login">
+          <button css={loginButton}>
+            <Icon icon="sign-in-alt" css={{ width: '35px', height: '35px' }} />
+            Login
+          </button>
+        </Link>
+      </Flex>
     )
   }
 
