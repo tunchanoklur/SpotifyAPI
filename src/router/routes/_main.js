@@ -5,11 +5,6 @@ const routes = [
     page: 'index',
   },
   {
-    pattern: '/album',
-    name: 'album',
-    page: 'album',
-  },
-  {
     pattern: '/playlists',
     name: 'playlists',
     page: 'playlists',
