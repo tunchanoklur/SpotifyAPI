@@ -17,6 +17,8 @@ import {
   faVolumeMute,
   faVolumeDown,
   faPlus,
+  faAngleUp,
+  faAngleDown,
 } from '@fortawesome/free-solid-svg-icons'
 
 config.autoAddCss = false
@@ -39,4 +41,6 @@ library.add(
   faVolumeMute,
   faVolumeDown,
   faPlus,
+  faAngleUp,
+  faAngleDown,
 )

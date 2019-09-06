@@ -17,6 +17,7 @@ export default class MusicPlayerStore {
   @observable playbackRate = 1.0
   @observable loop = false
   @observable seeking = false
+  @observable showPlayQueue = false
 
   @observable ref = player => {
     this.player = player
@@ -48,7 +49,7 @@ export default class MusicPlayerStore {
   @action
   addToQueue(track) {
     this.playQueue.push(track)
-    console.log(this.playQueue)
+    console.log('PlayQueue', this.playQueue)
   }
   @action
   handlePlayPause() {
@@ -113,7 +114,10 @@ export default class MusicPlayerStore {
     this.played = info.played
     this.playedSec = info.playedSeconds
   }
-
+  @action
+  handleShowPlayQueue() {
+    this.showPlayQueue = !this.showPlayQueue
+  }
   @computed
   get playedDuration() {
     return `  ${transformDuration(this.playedSec * 1000)}`
