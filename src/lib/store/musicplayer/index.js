@@ -73,9 +73,8 @@ export default class MusicPlayerStore {
   handleSongEnd() {
     this.handlePlayPause()
     if (this.mode === 0) {
-      // play next song
       if (this.playingSongIndex === this.playQueue.length - 1) {
-        this.setPlaying(this.playQueue[0])
+        this.setPlaying(this.playQueue[0], true)
       } else {
         this.setPlaying(this.playQueue[this.playingSongIndex + 1])
       }
