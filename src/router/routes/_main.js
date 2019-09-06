@@ -10,6 +10,11 @@ const routes = [
     page: 'playlists',
   },
   {
+    pattern: '/login',
+    name: 'login',
+    page: 'login',
+  },
+  {
     pattern: '/playlists/:id',
     name: 'playlistsDetail',
     page: 'playlistsDetail',
