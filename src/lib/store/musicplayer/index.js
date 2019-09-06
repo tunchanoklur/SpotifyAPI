@@ -80,8 +80,25 @@ export default class MusicPlayerStore {
       } else {
         this.setPlaying(this.playQueue[this.playingSongIndex + 1])
       }
+    } else if (this.mode === 2 && this.playQueue.length !== 1) {
+      let newIndex = this.playingSongIndex
+      while (this.playingSongIndex === newIndex) {
+        newIndex = getRandomInt(0, this.playQueue.length - 1)
+      }
+      this.setPlaying(this.playQueue[newIndex])
     }
   }
+  @action
+  handleMode() {
+    if (this.mode === 0) {
+      this.loop = true
+      this.mode = 1
+    } else if (this.mode === 1) {
+      this.loop = false
+      this.mode = 2
+    } else if (this.mode === 2) this.mode = 0
+  }
+
   @action
   handleLoop() {
     this.loop = !this.loop
@@ -146,4 +163,10 @@ export default class MusicPlayerStore {
   get playedDuration() {
     return `  ${transformDuration(this.playedSec * 1000)}`
   }
+}
+
+function getRandomInt(min, max) {
+  min = Math.ceil(min)
+  max = Math.floor(max)
+  return Math.floor(Math.random() * (max - min + 1)) + min
 }

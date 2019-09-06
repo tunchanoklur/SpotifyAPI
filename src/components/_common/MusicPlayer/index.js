@@ -239,6 +239,37 @@ function MusicPlayer({ RootStore: { MusicPlayerStore } }) {
         <span
           css={css`
              {
+              width: 5%;
+              margin: auto;
+              justify-content: flex-end;
+              position: relative;
+            }
+          `}>
+          <button
+            onClick={() => MusicPlayerStore.handleMode()}
+            css={css`
+              margin-right: 10px;
+              border: transparent;
+              background-color: transparent;
+              width: 30px;
+              height: 30px;
+              color: #d3d3d3;
+              cursor: pointer;
+            `}>
+            <Icon
+              icon={
+                MusicPlayerStore.mode === 0
+                  ? 'retweet'
+                  : MusicPlayerStore.mode === 1
+                  ? 'redo-alt'
+                  : 'random'
+              }
+            />
+          </button>
+        </span>
+        <span
+          css={css`
+             {
               width: 20%;
               margin: auto;
               justify-content: flex-end;

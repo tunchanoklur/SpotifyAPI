@@ -23,6 +23,7 @@ import {
   faStepForward,
   faStepBackward,
   faRetweet,
+  faRedoAlt,
 } from '@fortawesome/free-solid-svg-icons'
 
 config.autoAddCss = false
@@ -51,4 +52,5 @@ library.add(
   faStepForward,
   faStepBackward,
   faRetweet,
+  faRedoAlt,
 )
