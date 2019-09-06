@@ -34,10 +34,13 @@ export default function withAuth(PageComponent) {
             removeCookie(AUTH_COOKIE_NAME)
             window.location.href = process.env.REDIRECT_URI
           }, 60 * 60 * 1000)
-          history.pushState({}, '', '/')
         }
 
         token = tokenFromHash
+      }
+
+      if (token !== false) {
+        history.pushState({}, '', '/')
       }
 
       setToken(token || false)

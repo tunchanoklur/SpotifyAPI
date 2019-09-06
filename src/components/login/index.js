@@ -1,63 +1,51 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { inject } from 'mobx-react'
-import { flowRight as compose } from 'lodash'
-import firebase from 'firebase/app'
-import 'firebase/auth'
+import React from 'react'
+import { Flex } from '@rebass/grid/emotion'
 
-import { Router } from '@router'
 import withPage from '@lib/page/withPage'
-import { userContext } from '@lib/firebase/auth'
+import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
+import { Link } from '@router'
+import { getStatic } from '@lib/static'
 
-function LoginPage({ RootStore }) {
-  const userData = useContext(userContext)
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-
-  const login = e => {
-    e.preventDefault()
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .catch(error => {
-        RootStore.errorStore.addError({
-          title: error.message,
-        })
-      })
-  }
-
-  useEffect(() => {
-    if (userData) {
-      const { redirect } = Router.router.query
-
-      if (redirect) {
-        Router.push(redirect)
-        return
-      }
-
-      Router.pushRoute('account')
-    }
-  }, [userData])
-
+const loginButton = {
+  display: 'inline-box',
+  justifyContent: 'center',
+  backgroundColor: '#1ed761 !important',
+  borderColor: '#1ed761 !important',
+  width: '50%',
+  height: '60px',
+  borderRadius: '28px',
+  fontSize: '35px',
+  cursor: 'pointer',
+  margin: 'auto',
+}
+const logoStyle = {
+  display: 'block',
+  paddingBottom: '30px',
+  width: '60%',
+  margin: 'auto',
+}
+function LoginPage() {
   return (
-    <form onSubmit={login}>
-      <p>
-        <label>
-          Email:
-          <input type="text" onChange={e => setEmail(e.target.value)} />
-        </label>
-      </p>
-      <p>
-        <label>
-          Password:
-          <input type="password" onChange={e => setPassword(e.target.value)} />
-        </label>
-      </p>
-      <button>Log in</button>
-    </form>
+    <Flex flexWrap="wrap">
+      <img
+        css={logoStyle}
+        src={getStatic('spotify/spotifyLogo.png')}
+        alt={'SpotifyLogo'}
+      />
+      <Link to="/api/login">
+        <button css={loginButton}>
+          <Icon icon="sign-in-alt" css={{ width: '35px', height: '35px' }} />
+          Login
+        </button>
+      </Link>
+    </Flex>
   )
 }
 
-export default compose(
-  withPage(),
-  inject('RootStore'),
-)(LoginPage)
+LoginPage.getInitialProps = async () => {
+  return {
+    title: 'Login',
+  }
+}
+
+export default withPage({ layout: false })(LoginPage)

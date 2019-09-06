@@ -5,9 +5,9 @@ const routes = [
     page: 'index',
   },
   {
-    pattern: '/article/:id',
-    name: 'articleDetail',
-    page: 'articleDetail',
+    pattern: '/album',
+    name: 'album',
+    page: 'album',
   },
   {
     pattern: '/playlists',
