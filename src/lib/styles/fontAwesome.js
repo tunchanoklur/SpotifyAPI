@@ -19,6 +19,10 @@ import {
   faPlus,
   faAngleUp,
   faAngleDown,
+  faRandom,
+  faStepForward,
+  faStepBackward,
+  faRetweet,
 } from '@fortawesome/free-solid-svg-icons'
 
 config.autoAddCss = false
@@ -43,4 +47,8 @@ library.add(
   faPlus,
   faAngleUp,
   faAngleDown,
+  faRandom,
+  faStepForward,
+  faStepBackward,
+  faRetweet,
 )

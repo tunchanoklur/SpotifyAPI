@@ -69,45 +69,6 @@ function MusicPlayer({ RootStore: { MusicPlayerStore } }) {
           }}
           src={get(MusicPlayerStore, 'playingSong.album.images[0].url', '')}
         />
-        <button
-          onClick={() => MusicPlayerStore.handlePlayPause()}
-          css={{
-            padding: '0 0 0 7px',
-            marginRight: '10px',
-            borderRadius: '50%',
-            backgroundColor: 'transparent',
-            border: 'thin solid currentColor',
-            justifyContent: 'center',
-            width: '30px',
-            height: '30px',
-            color: '#555',
-          }}>
-          {MusicPlayerStore.playing ? (
-            <Icon
-              icon="pause"
-              css={{
-                alignItems: 'center',
-                display: 'flex',
-                flex: '1 0 auto',
-                justifyContent: 'inherit',
-                lineHeight: 'normal',
-                position: 'relative',
-              }}
-            />
-          ) : (
-            <Icon
-              icon="play"
-              css={{
-                alignItems: 'center',
-                display: 'flex',
-                flex: '1 0 auto',
-                justifyContent: 'inherit',
-                lineHeight: 'normal',
-                position: 'relative',
-              }}
-            />
-          )}
-        </button>
         {MusicPlayerStore.playingSong.name}
         <span
           css={css`
@@ -182,6 +143,98 @@ function MusicPlayer({ RootStore: { MusicPlayerStore } }) {
             onMouseUp={e => MusicPlayerStore.handleSeekMouseUp(e)}
           />
           {MusicPlayerStore.playedDuration}
+        </span>
+        <span
+          css={css`
+             {
+              width: 30%;
+              margin-left: 20px;
+              justify-content: center;
+              position: relative;
+            }
+          `}>
+          <button
+            onClick={() => MusicPlayerStore.handlePrev()}
+            css={css`
+              margin-right: 10px;
+              border: transparent;
+              background-color: transparent;
+              width: 30px;
+              height: 30px;
+              color: #d3d3d3;
+              cursor: pointer;
+            `}>
+            <Icon
+              icon="step-backward"
+              css={{
+                alignItems: 'center',
+                display: 'flex',
+                flex: '1 0 auto',
+                justifyContent: 'inherit',
+                lineHeight: 'normal',
+                position: 'relative',
+              }}
+            />
+          </button>
+          <button
+            onClick={() => MusicPlayerStore.handlePlayPause()}
+            css={{
+              backgroundColor: 'transparent',
+              border: 'transparent',
+              justifyContent: 'center',
+              width: '30px',
+              height: '30px',
+              color: '#d3d3d3',
+            }}>
+            {MusicPlayerStore.playing ? (
+              <Icon
+                icon="pause"
+                css={{
+                  alignItems: 'center',
+                  display: 'flex',
+                  flex: '1 0 auto',
+                  justifyContent: 'inherit',
+                  lineHeight: 'normal',
+                  position: 'relative',
+                }}
+              />
+            ) : (
+              <Icon
+                icon="play"
+                css={{
+                  alignItems: 'center',
+                  display: 'flex',
+                  flex: '1 0 auto',
+                  justifyContent: 'inherit',
+                  lineHeight: 'normal',
+                  position: 'relative',
+                }}
+              />
+            )}
+          </button>
+          <button
+            onClick={() => MusicPlayerStore.handleNext()}
+            css={css`
+              margin-right: 10px;
+              border: transparent;
+              background-color: transparent;
+              width: 30px;
+              height: 30px;
+              color: #d3d3d3;
+              cursor: pointer;
+            `}>
+            <Icon
+              icon="step-forward"
+              css={{
+                alignItems: 'center',
+                display: 'flex',
+                flex: '1 0 auto',
+                justifyContent: 'inherit',
+                lineHeight: 'normal',
+                position: 'relative',
+              }}
+            />
+          </button>
         </span>
         <span
           css={css`

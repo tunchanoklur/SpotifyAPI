@@ -61,7 +61,9 @@ export default class MusicPlayerStore {
   }
   @action
   addToQueue(track) {
-    this.playQueue.push(track)
+    const songIndex = this.findSongInQueue(track)
+    if (songIndex === -1) this.playQueue.push(track)
+    else this.setPlaying(songIndex)
     console.log('PlayQueue', this.playQueue)
   }
   @action
@@ -74,7 +76,7 @@ export default class MusicPlayerStore {
     this.handlePlayPause()
     if (this.mode === 0) {
       if (this.playingSongIndex === this.playQueue.length - 1) {
-        this.setPlaying(this.playQueue[0], true)
+        this.setPlaying(this.playQueue[0])
       } else {
         this.setPlaying(this.playQueue[this.playingSongIndex + 1])
       }
@@ -99,13 +101,18 @@ export default class MusicPlayerStore {
   handlePlaybackRate(e) {
     this.playbackRate = parseFloat(e.target.value)
   }
-
   @action
-  handleEnded() {
-    console.log('onEnded')
-    this.setState({ playing: this.state.loop })
+  handleNext() {
+    if (this.playingSongIndex === this.playQueue.length - 1)
+      this.setPlaying(this.playQueue[0])
+    else this.setPlaying(this.playQueue[this.playingSongIndex + 1])
   }
-
+  @action
+  handlePrev() {
+    if (this.playingSongIndex === 0)
+      this.setPlaying(this.playQueue[this.playQueue.length - 1])
+    else this.setPlaying(this.playQueue[this.playingSongIndex - 1])
+  }
   @action
   setDuration(duration) {
     console.log('onDuration', duration)
