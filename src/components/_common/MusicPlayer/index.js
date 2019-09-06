@@ -147,7 +147,7 @@ function MusicPlayer({ RootStore: { MusicPlayerStore } }) {
         <span
           css={css`
              {
-              width: 30%;
+              width: 10%;
               margin-left: 20px;
               justify-content: center;
               position: relative;
@@ -239,7 +239,7 @@ function MusicPlayer({ RootStore: { MusicPlayerStore } }) {
         <span
           css={css`
              {
-              width: 5%;
+              width: 2%;
               margin: auto;
               justify-content: flex-end;
               position: relative;
