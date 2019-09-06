@@ -5,6 +5,7 @@ import { inject, observer } from 'mobx-react'
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
 import get from 'lodash/get'
 import { css } from '@emotion/core'
+import PlayQueue from './PlayQueue'
 
 function MusicPlayer({ RootStore: { MusicPlayerStore } }) {
   return (
@@ -19,6 +20,7 @@ function MusicPlayer({ RootStore: { MusicPlayerStore } }) {
         background: 'rgba(0, 0, 0, 80%)',
         borderTop: '1px solid #eee',
         color: '#aaa',
+        height: MusicPlayerStore.showPlayQueue ? '50%' : 'unset',
       }}>
       <ReactPlayer
         ref={MusicPlayerStore.ref}
@@ -126,7 +128,7 @@ function MusicPlayer({ RootStore: { MusicPlayerStore } }) {
                 position: absolute;
                 z-index: -1;
                 background-color: transparent;
-                transition: width 0.6s ease;
+                transition: width 0.1s ease;
                 color: #d3d3d3;
                 &::-webkit-progress-bar {
                   border-radius: 5px;
@@ -161,7 +163,6 @@ function MusicPlayer({ RootStore: { MusicPlayerStore } }) {
                   background: #1ed761;
                   cursor: pointer;
                 }
-
                 &::-moz-range-thumb {
                   width: 20px;
                   height: 20px;
@@ -225,7 +226,7 @@ function MusicPlayer({ RootStore: { MusicPlayerStore } }) {
                   width: 20px;
                   height: 20px;
                   border-radius: 50%;
-                  background: #1ed761;
+                  background: #b2b0b0;
                   cursor: pointer;
                 }
 
@@ -233,7 +234,7 @@ function MusicPlayer({ RootStore: { MusicPlayerStore } }) {
                   width: 20px;
                   height: 20px;
                   border-radius: 50%;
-                  background: #1ed761;
+                  background: #b2b0b0;
                   cursor: pointer;
                 }
               }
@@ -246,7 +247,33 @@ function MusicPlayer({ RootStore: { MusicPlayerStore } }) {
             onChange={e => MusicPlayerStore.handleVolume(e)}
           />
         </span>
+        <span
+          css={css`
+             {
+              width: 5%;
+              margin: auto;
+              justify-content: flex-end;
+              position: relative;
+            }
+          `}>
+          <button
+            onClick={() => MusicPlayerStore.handleShowPlayQueue()}
+            css={css`
+              margin-right: 10px;
+              border: transparent;
+              background-color: transparent;
+              width: 30px;
+              height: 30px;
+              color: #d3d3d3;
+              cursor: pointer;
+            `}>
+            <Icon
+              icon={MusicPlayerStore.showPlayQueue ? 'angle-down' : 'angle-up'}
+            />
+          </button>
+        </span>
       </div>
+      <PlayQueue tracks={MusicPlayerStore.playQueue} />
     </div>
   )
 }
