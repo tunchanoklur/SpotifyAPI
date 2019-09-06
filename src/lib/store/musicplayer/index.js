@@ -4,6 +4,7 @@ import { transformDuration } from '@components/_common/timeTransformer'
 export default class MusicPlayerStore {
   @observable everPlay = false
   @observable playingSong = {}
+  @observable playingSongIndex = -1
   @observable playQueue = []
   @observable playing = false
   @observable controls = false
@@ -18,25 +19,37 @@ export default class MusicPlayerStore {
   @observable loop = false
   @observable seeking = false
   @observable showPlayQueue = false
-
+  @observable mode = 0 // 0 normal loop, 1 play same song, 2 random
   @observable ref = player => {
     this.player = player
   }
 
   @action
   setPlaying(songInfo) {
+    const songIndex = this.findSongInQueue(songInfo)
+    if (this.playingSongIndex !== -1 && songIndex === this.playingSongIndex) {
+      this.handlePlayPause()
+    } else {
+      if (songIndex === -1) {
+        this.addToQueue(songInfo)
+        this.playingSongIndex = this.playQueue.length - 1
+      } else {
+        this.playingSongIndex = songIndex
+      }
+      this.playingSong = this.playQueue[this.playingSongIndex]
+      this.setStart()
+      this.playing = true
+    }
     if (this.everPlay === false) {
       this.everPlay = true
     }
+  }
 
-    console.log('Play', songInfo)
-    if (this.playingSong.id !== songInfo.id) {
-      this.playingSong = songInfo
-      this.playing = true
-      this.setStart()
-    } else {
-      this.handlePlayPause()
-    }
+  @action
+  findSongInQueue(songInfo) {
+    return this.playQueue.findIndex(track => {
+      return track.id === songInfo.id
+    })
   }
 
   @action
@@ -59,8 +72,13 @@ export default class MusicPlayerStore {
   @action
   handleSongEnd() {
     this.handlePlayPause()
-    if (this.playQueue.length !== 0) {
-      this.setPlaying(this.playQueue[0])
+    if (this.mode === 0) {
+      // play next song
+      if (this.playingSongIndex === this.playQueue.length - 1) {
+        this.setPlaying(this.playQueue[0])
+      } else {
+        this.setPlaying(this.playQueue[this.playingSongIndex + 1])
+      }
     }
   }
   @action
