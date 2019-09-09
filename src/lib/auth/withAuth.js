@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useCookies } from 'react-cookie'
 
 export const AUTH_COOKIE_NAME = 'spotify-token'
-
+export const EXP_COOKIE_NAME = 'spotify-token-expire'
 export const userContext = React.createContext(null)
 
 function findTokenInAsPath(asPath) {
@@ -19,7 +19,7 @@ function findTokenInAsPath(asPath) {
 export default function withAuth(PageComponent) {
   function EnhancedPageComponent(props) {
     const [token, setToken] = useState(null)
-    const [cookies, setCookie] = useCookies([AUTH_COOKIE_NAME])
+    const [cookies, setCookie, removeCookie] = useCookies([AUTH_COOKIE_NAME])
     const { asPath } = useRouter()
 
     useEffect(() => {
@@ -30,6 +30,11 @@ export default function withAuth(PageComponent) {
 
         if (tokenFromHash) {
           setCookie(AUTH_COOKIE_NAME, tokenFromHash, { maxAge: 60 * 60 })
+          setTimeout(function() {
+            removeCookie(AUTH_COOKIE_NAME)
+            window.location.href = process.env.REDIRECT_URI
+          }, 60 * 60 * 1000)
+
           history.pushState({}, '', '/')
         }
 

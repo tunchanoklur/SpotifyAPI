@@ -4,7 +4,8 @@ import { flowRight as compose } from 'lodash'
 import { inject, observer } from 'mobx-react'
 import { css } from '@emotion/core'
 import { transformDuration } from '@components/_common/timeTransformer'
-function SongListItem({ track, RootStore: { MusicPlayerStore } }) {
+
+function PlayQueueItem({ track, RootStore: { MusicPlayerStore } }) {
   return (
     <div
       css={{
@@ -81,40 +82,6 @@ function SongListItem({ track, RootStore: { MusicPlayerStore } }) {
         }}>
         {transformDuration(track.duration_ms)}
       </span>
-      <span
-        css={{
-          width: '5%',
-          alignSelf: 'center',
-        }}>
-        <button
-          disabled={!track.preview_url}
-          onClick={() => MusicPlayerStore.addToQueue(track)}
-          css={css`
-            margin-right: 10px;
-            border: transparent;
-            background-color: transparent;
-            width: 30px;
-            height: 30px;
-            color: #555;
-            cursor: pointer;
-            &:disabled {
-              color: #262626;
-              cursor: default;
-            }
-          `}>
-          <Icon
-            icon="plus"
-            css={{
-              alignItems: 'center',
-              display: 'flex',
-              flex: '1 0 auto',
-              justifyContent: 'inherit',
-              lineHeight: 'normal',
-              position: 'relative',
-            }}
-          />
-        </button>
-      </span>
     </div>
   )
 }
@@ -122,4 +89,4 @@ function SongListItem({ track, RootStore: { MusicPlayerStore } }) {
 export default compose(
   inject('RootStore'),
   observer,
-)(SongListItem)
+)(PlayQueueItem)
