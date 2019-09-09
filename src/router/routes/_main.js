@@ -5,14 +5,14 @@ const routes = [
     page: 'index',
   },
   {
-    pattern: '/article/:id',
-    name: 'articleDetail',
-    page: 'articleDetail',
-  },
-  {
     pattern: '/playlists',
     name: 'playlists',
     page: 'playlists',
+  },
+  {
+    pattern: '/login',
+    name: 'login',
+    page: 'login',
   },
   {
     pattern: '/playlists/:id',
