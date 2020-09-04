@@ -61,7 +61,7 @@
     "next-fonts": "^0.17.0",
     "next-offline": "^3.3.8",
     "next-routes": "^1.4.2",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.1",
     "normalize.css": "^8.0.1",
     "null-loader": "^3.0.0",
     "react": "^16.8.6",
