@@ -54,7 +54,7 @@
     "faker": "^4.1.0",
     "firebase": "^5.9.3",
     "json-server": "^0.14.2",
-    "lodash": "^4.17.13",
+    "lodash": "^4.17.21",
     "mobx": "^5.9.4",
     "mobx-react": "^5.4.3",
     "next": "^9.0.5",
