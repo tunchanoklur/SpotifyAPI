@@ -49,7 +49,7 @@
     "dotenv": "^7.0.0",
     "dotenv-webpack": "^1.7.0",
     "emotion-theming": "^10.0.10",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "express-useragent": "^1.0.12",
     "faker": "^4.1.0",
     "firebase": "^5.9.3",
